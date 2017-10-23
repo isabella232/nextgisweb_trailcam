@@ -3,7 +3,7 @@ NextGIS Web extension for phototraps
 
 ## Installation
 
-`emv/bin/pip install -e ./nextgisweb_phototrap`
+`env/bin/pip install -e ./nextgisweb_phototrap`
 
 For translations:
 ```bash
