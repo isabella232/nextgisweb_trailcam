@@ -5,17 +5,17 @@ from .model import Base
 from .util import COMP_ID
 
 
-class PhototrapComponent(Component):
+class TrailcamComponent(Component):
     identity = COMP_ID
     metadata = Base.metadata
 
     def initialize(self):
-        super(PhototrapComponent, self).initialize()
+        super(TrailcamComponent, self).initialize()
         from . import plugin
 
     @require('resource', 'webmap')
     def setup_pyramid(self, config):
-        super(PhototrapComponent, self).setup_pyramid(config)
+        super(TrailcamComponent, self).setup_pyramid(config)
         view.setup_pyramid(self, config)
 
     def client_settings(self, request):
@@ -26,12 +26,12 @@ class PhototrapComponent(Component):
 
 def pkginfo():
     return dict(components=dict(
-        tracker='nextgisweb_phototrap')
+        tracker='nextgisweb_trailcam')
     )
 
 
 def amd_packages():
     return (
-        ('ngw-phototrap', 'nextgisweb_phototrap:amd/ngw-phototrap'),
+        ('ngw-trailcam', 'nextgisweb_trailcam:amd/ngw-trailcam'),
     )
 

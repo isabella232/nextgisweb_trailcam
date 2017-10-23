@@ -12,19 +12,19 @@ requires = (
 
 entry_points = {
     'nextgisweb.packages': [
-        'nextgisweb_tracker = nextgisweb_tracker:pkginfo',
+        'nextgisweb_trailcam = nextgisweb_trailcam:pkginfo',
     ],
 
     'nextgisweb.amd_packages': [
-        'nextgisweb_tracker = nextgisweb_tracker:amd_packages',
+        'nextgisweb_trailcam = nextgisweb_trailcam:amd_packages',
     ],
 
 }
 
 setup(
-    name='nextgisweb_tracker',
+    name='nextgisweb_trailcam',
     version=version,
-    description="Nextgisweb tracker extension",
+    description="Nextgisweb trailcam extension",
     long_description="",
     classifiers=[
         "Programming Language :: Python",
@@ -34,8 +34,8 @@ setup(
     ],
     author='NextGIS',
     author_email='info@nextgis.ru',
-    url='https://github.com/nextgis/nextgisweb_tracker',
-    keywords='web pyramid nextgis GIS gps tracker track',
+    url='https://github.com/nextgis/nextgisweb_trailcam',
+    keywords='web pyramid nextgis GIS trailcam',
     license='',
     packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
     include_package_data=True,

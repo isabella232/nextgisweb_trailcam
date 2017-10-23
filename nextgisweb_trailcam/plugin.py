@@ -3,11 +3,11 @@ from nextgisweb.webmap.plugin import WebmapPlugin
 
 
 @WebmapPlugin.registry.register
-class PhototrapPlugin(WebmapPlugin):
+class TrailcamPlugin(WebmapPlugin):
 
     @classmethod
     def is_supported(cls, webmap):
         return (
-            'ngw-phototrap/webmap/plugin/PhototrapWebMap',
+            'ngw-trailcam/webmap/plugin/TrailcamWebMap',
             dict()
         )

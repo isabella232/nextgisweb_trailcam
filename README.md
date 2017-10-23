@@ -1,15 +1,15 @@
-NextGIS Web extension for phototraps
-==================================
+NextGIS Web extension for trail cameras
+=======================================
 
 ## Installation
 
-`env/bin/pip install -e ./nextgisweb_phototrap`
+`env/bin/pip install -e ./nextgisweb_trailcam`
 
 For translations:
 ```bash
-nextgisweb-i18n --package nextgisweb_phototrap extract phototrap
-nextgisweb-i18n --package nextgisweb_phototrap update phototrap
-nextgisweb-i18n --package nextgisweb_phototrap compile
+nextgisweb-i18n --package nextgisweb_trailcam extract trailcam
+nextgisweb-i18n --package nextgisweb_trailcam update trailcam
+nextgisweb-i18n --package nextgisweb_trailcam compile
 ```
 
 License
