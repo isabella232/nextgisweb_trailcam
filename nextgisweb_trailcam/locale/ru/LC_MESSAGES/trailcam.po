@@ -1,0 +1,58 @@
+# Russian translations for nextgisweb_trailcam.
+# Copyright (C) 2017 NextGIS
+# This file is distributed under the same license as the nextgisweb_trailcam
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: nextgisweb_trailcam 0.0dev-r0\n"
+"Report-Msgid-Bugs-To: info@nextgis.ru\n"
+"POT-Creation-Date: 2017-10-24 11:16+0300\n"
+"PO-Revision-Date: 2017-07-24 11:00+0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ru\n"
+"Language-Team: ru <LL@li.org>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.3.4\n"
+
+#: amd/ngw-trailcam/settings/TrailcamSettings.hbs:4
+msgid "Default email connections settings"
+msgstr "Настройки e-mail соединений (по-умолчанию)"
+
+#: amd/ngw-trailcam/settings/TrailcamSettings.hbs:11
+msgid "Email retrieval period, sec"
+msgstr "Период проверки email, сек"
+
+#: amd/ngw-trailcam/settings/TrailcamSettings.hbs:18
+msgid "Save"
+msgstr "Сохранить"
+
+#: amd/ngw-trailcam/settings/TrailcamSettings.js:63
+msgid "Trail cameras settings has been saved successfully!"
+msgstr "Настройки фотоловушек успешно сохранены!"
+
+#: amd/ngw-trailcam/settings/TrailcamSettings.js:65
+msgid "Error, trail cameras settings not has been saved!"
+msgstr "Ошибка, настройки фотоловушек не были сохранены!"
+
+#: models/email_connection.py:13
+msgid "Email connection"
+msgstr "Email соединение"
+
+#: models/trail_cameras.py:13
+msgid "Trail cameras"
+msgstr "Фотоловушки"
+
+#: models/trail_cameras.py:24
+msgid "Trail camera"
+msgstr "Фотоловушка"
+
+#: view/trailcam_settings.py:13
+msgid "Trail cameras module settings"
+msgstr "Настройки модуля фотоловушек"
+

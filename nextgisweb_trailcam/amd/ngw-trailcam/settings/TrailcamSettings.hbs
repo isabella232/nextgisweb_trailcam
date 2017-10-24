@@ -1,0 +1,23 @@
+<div data-dojo-type="${baseClass}"
+     data-dojo-attach-point="focusNode">
+
+    <h2>{{gettext 'Default email connections settings'}}</h2>
+
+    <div data-dojo-type="dojox/layout/TableContainer"
+         data-dojo-props="cols:1"
+         style="width: 100%">
+        <div data-dojo-type="dijit/form/NumberTextBox"
+             data-dojo-attach-point="emailRetrievalPeriod"
+             title="{{gettext 'Email retrieval period, sec'}}"
+             value=""></div>
+    </div>
+
+    <div style="margin-top:10px;">
+        <button data-dojo-type="dijit/form/Button"
+                data-dojo-attach-point="buttonSave"
+                class="dijitButton--primary">{{gettext 'Save'}}
+        </button>
+    </div>
+
+
+</div>
