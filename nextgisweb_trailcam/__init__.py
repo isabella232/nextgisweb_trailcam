@@ -13,7 +13,7 @@ class TrailcamComponent(Component):
         super(TrailcamComponent, self).initialize()
         from . import plugin
 
-    @require('resource', 'webmap')
+    @require('resource', 'webmap', 'pyramid')
     def setup_pyramid(self, config):
         super(TrailcamComponent, self).setup_pyramid(config)
         view.setup_pyramid(self, config)

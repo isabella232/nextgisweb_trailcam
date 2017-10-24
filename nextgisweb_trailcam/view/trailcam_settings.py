@@ -2,6 +2,7 @@
 from nextgisweb.env import env
 from nextgisweb_trailcam.util import _
 from pyramid.httpexceptions import HTTPBadRequest
+from nextgisweb import dynmenu as dm
 
 SETTINGS_MODULE_KEY = 'trailcam'
 RETRIEVAL_PERIOD_KEY = 'email_retrieval_period'
@@ -41,3 +42,9 @@ def trailcam_settings_put(request):
         else:
             raise HTTPBadRequest("Invalid key '%s' value!" % k)
 
+
+def add_to_menu(comp):
+    comp.env.pyramid.control_panel.add(
+        dm.Link('settings/trailcam', _("Trail cameras"), lambda args: (
+            args.request.route_url('pyramid.control_panel.trailcam')))
+    )
