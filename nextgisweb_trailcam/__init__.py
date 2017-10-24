@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import view
 from nextgisweb.component import Component, require
-from .model import Base
+from models import Base
 from .util import COMP_ID
 
 
@@ -26,7 +26,7 @@ class TrailcamComponent(Component):
 
 def pkginfo():
     return dict(components=dict(
-        tracker='nextgisweb_trailcam')
+        trailcam='nextgisweb_trailcam')
     )
 
 
