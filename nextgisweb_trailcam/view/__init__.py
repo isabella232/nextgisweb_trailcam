@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from .trailcam_settings import *
+from .settings import *
 
 
 def setup_pyramid(comp, config):
