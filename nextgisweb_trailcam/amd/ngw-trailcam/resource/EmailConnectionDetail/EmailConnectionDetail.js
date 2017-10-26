@@ -29,12 +29,8 @@ define([
         title: i18n.gettext('Email connection detail'),
         prefix: 'trailcam_email_conn',
 
-        serializeInMixin: function (data) {
-            debugger;
-        },
+        serializeInMixin: function (data) { },
 
-        deserializeInMixin: function (data) {
-            debugger;
-        }
+        deserializeInMixin: function (data) { }
     });
 });
