@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from .settings import *
+from .resource import *
 
 
 def setup_pyramid(comp, config):

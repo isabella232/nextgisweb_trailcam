@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import view
 from nextgisweb.component import Component, require
-from models import Base
+from model import Base
 from .util import COMP_ID
 
 

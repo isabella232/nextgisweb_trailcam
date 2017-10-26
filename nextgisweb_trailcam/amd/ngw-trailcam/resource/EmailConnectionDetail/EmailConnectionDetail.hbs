@@ -1,0 +1,47 @@
+<div data-dojo-type="${baseClass}" data-dojo-attach-point="focusNode"
+     data-ngw-serialize-prefix="${prefix}" class="padding-block">
+
+    <div data-dojo-attach-point="container"
+         data-dojo-type="dojox/layout/TableContainer" data-dojo-props="cols:1, labelWidth: 150">
+
+        <input data-dojo-attach-point="email"
+               data-ngw-serialize="email"
+               required="true"
+               title="{{gettext 'Email address'}}"
+               data-dojo-type="dijit/form/ValidationTextBox"
+               data-dojo-props="validator:dojox.validate.isEmailAddress, invalidMessage:'{{gettext 'Invalid email'}}'"/>
+
+        <input data-dojo-type="dijit/form/ValidationTextBox"
+               name="imap_server"
+               required="true"
+               title="{{gettext 'IMAP server address'}}"
+               data-ngw-serialize="imap_server"
+               data-dojo-props="invalidMessage:'{{gettext 'Please enter IMAP server address'}}'"
+               style="width: 100%"/>
+
+        <input data-dojo-type="dijit/form/NumberTextBox"
+               name="imap_server_port"
+               required="true"
+               title="{{gettext 'IMAP port'}}"
+               data-ngw-serialize="imap_server_port"
+               data-dojo-props="constraints:{min:1,max:65535}, invalidMessage:'{{gettext 'Invalid port, should be from 1 to 65535'}}'"
+               style="width: 100%"/>
+
+        <input data-dojo-type="dijit/form/ValidationTextBox"
+               name="login"
+               required="true"
+               title="{{gettext 'Login'}}"
+               data-ngw-serialize="login"
+               data-dojo-props="invalidMessage:'{{gettext 'Please enter login to your email box'}}'"
+               style="width: 100%"/>
+
+        <input data-dojo-type="dijit/form/ValidationTextBox"
+               name="password"
+               required="true"
+               type="password"
+               title="{{gettext 'Password'}}"
+               data-ngw-serialize="password"
+               data-dojo-props="invalidMessage:'{{gettext 'Please enter password to your email box'}}'"
+               style="width: 100%"/>
+    </div>
+</div>
