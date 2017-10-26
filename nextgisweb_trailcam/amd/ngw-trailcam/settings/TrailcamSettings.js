@@ -49,6 +49,7 @@ define([
                 handleAs: 'json'
             }).then(function (data) {
                 self.emailRetrievalPeriod.attr('value', data.email_retrieval_period);
+                self.layerZIndex.attr('value', data.layer_z_index);
             });
         },
 
@@ -57,7 +58,8 @@ define([
                 handleAs: 'json',
                 headers: {'Content-Type': 'application/json'},
                 data: json.stringify({
-                    email_retrieval_period: this.emailRetrievalPeriod.attr('value')
+                    email_retrieval_period: this.emailRetrievalPeriod.attr('value'),
+                    layer_z_index: this.layerZIndex.attr('value')
                 })
             }).then(function () {
                 alert(i18n.gettext('Trail cameras settings has been saved successfully!'));

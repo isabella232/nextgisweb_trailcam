@@ -6,6 +6,7 @@ from nextgisweb import dynmenu as dm
 
 SETTINGS_MODULE_KEY = 'trailcam'
 RETRIEVAL_PERIOD_KEY = 'email_retrieval_period'
+TRAIL_CAMERAS_LAYER_Z_INDEX = 'layer_z_index'
 
 
 def trailcam_settings(request):
@@ -29,6 +30,12 @@ def get_trailcam_settings():
         env.core.settings_set(SETTINGS_MODULE_KEY, RETRIEVAL_PERIOD_KEY, 600)
         result[RETRIEVAL_PERIOD_KEY] = 600
 
+    try:
+        result[TRAIL_CAMERAS_LAYER_Z_INDEX] = env.core.settings_get(SETTINGS_MODULE_KEY, TRAIL_CAMERAS_LAYER_Z_INDEX)
+    except KeyError:
+        env.core.settings_set(SETTINGS_MODULE_KEY, TRAIL_CAMERAS_LAYER_Z_INDEX, 1005)
+        result[TRAIL_CAMERAS_LAYER_Z_INDEX] = 1005
+
     return result
 
 
@@ -39,6 +46,8 @@ def trailcam_settings_put(request):
     for k, v in body.iteritems():
         if k == RETRIEVAL_PERIOD_KEY:
             env.core.settings_set(SETTINGS_MODULE_KEY, RETRIEVAL_PERIOD_KEY, v)
+        elif k == TRAIL_CAMERAS_LAYER_Z_INDEX:
+            env.core.settings_set(SETTINGS_MODULE_KEY, TRAIL_CAMERAS_LAYER_Z_INDEX, v)
         else:
             raise HTTPBadRequest("Invalid key '%s' value!" % k)
 
