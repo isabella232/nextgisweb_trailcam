@@ -84,12 +84,3 @@ class TrailcamSerializer(Serializer):
     is_auto = SerializedProperty(**_defaults)
     filter = SerializedProperty(**_defaults)
     email_connection = SerializedResourceRelationship(**_defaults)
-
-    def deserialize(self):
-        for prop, sp in self.proptab:
-            if prop in self.data and not prop in self.keys:
-                try:
-                    sp.deserialize(self)
-                except Exception as exc:
-                    self.annotate_exception(exc, sp)
-                    raise

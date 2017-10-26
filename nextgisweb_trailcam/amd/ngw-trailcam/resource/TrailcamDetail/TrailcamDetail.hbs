@@ -1,0 +1,43 @@
+<div data-dojo-type="${baseClass}" data-dojo-attach-point="focusNode"
+     data-ngw-serialize-prefix="${prefix}" class="padding-block">
+
+    <div data-dojo-attach-point="container"
+         data-dojo-type="dojox/layout/TableContainer" data-dojo-props="cols:1, labelWidth: 150">
+
+        <input data-dojo-type="dijit/form/NumberTextBox"
+               name="lat"
+               required="true"
+               title="{{gettext 'Latitude'}}"
+               data-ngw-serialize="lat"
+               data-dojo-props="constraints:{min:0,max:90}, invalidMessage:'{{gettext 'Invalid latitude, should be from 0 to 90'}}'"
+               style="width: 100%"/>
+
+        <input data-dojo-type="dijit/form/NumberTextBox"
+               name="lon"
+               required="true"
+               title="{{gettext 'Longitude'}}"
+               data-ngw-serialize="lon"
+               data-dojo-props="constraints:{min:0,max:180}, invalidMessage:'{{gettext 'Invalid longitude, should be from 0 to 180'}}'"
+               style="width: 100%"/>
+
+        <input data-dojo-type="dijit/form/CheckBox"
+               name="is_auto"
+               title="{{gettext 'Auto updating'}}"
+               data-ngw-serialize="is_auto"
+               checked
+               style="width: 100%"/>
+
+        <input data-dojo-type="dijit/form/TextBox"
+               name="filter"
+               required="true"
+               title="{{gettext 'Subject filter'}}"
+               data-ngw-serialize="filter"
+               style="width: 100%"/>
+
+        <div data-dojo-attach-point="emailConnection"
+             data-dojo-type="ngw-resource/ResourceBox"
+             data-ngw-serialize="email_connection"
+             data-dojo-props="cls: 'trailcam_email_conn'"
+             title="{{gettext 'Email connection'}}" style="width: 100%"></div>
+    </div>
+</div>
