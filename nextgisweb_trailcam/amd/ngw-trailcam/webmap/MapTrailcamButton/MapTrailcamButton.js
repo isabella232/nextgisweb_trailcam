@@ -5,9 +5,11 @@ define([
     'dojo/dom-class',
     'dojo/on',
     'dijit/form/ToggleButton',
-    'ngw-pyramid/i18n!trailcam'
-], function (declare, lang, domConstruct, domClass, on, ToggleButton, i18n) {
+    'ngw-pyramid/i18n!trailcam',
+    'ngw-trailcam/webmap/TrailcamLayer/TrailcamLayer'
+], function (declare, lang, domConstruct, domClass, on, ToggleButton, i18n, TrailcamLayer) {
     return declare([ToggleButton], {
+        _trailcamLayer: null,
 
         postCreate: function () {
             var customIcon = '<span class="ol-control__icon material-icons">camera</span>';
@@ -22,15 +24,16 @@ define([
             this.iconNode = domConstruct.toDom(customIcon);
             this.titleNode.appendChild(this.iconNode);
 
+            this._trailcamLayer = new TrailcamLayer(this.display.map);
             this.bindEvents();
         },
 
         bindEvents: function () {
             on(this, 'change', lang.hitch(this, function (value) {
                 if (value) {
-                    console.log(value);
+                    this._trailcamLayer.addToMap();
                 } else {
-                    console.log(value);
+                    this._trailcamLayer.removeFromMap();
                 }
             }));
         }
