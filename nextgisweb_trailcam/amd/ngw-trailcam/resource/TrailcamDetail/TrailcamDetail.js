@@ -1,6 +1,7 @@
 define([
     'dojo/_base/declare',
     'dojo/_base/lang',
+    'dojo/on',
     'dijit/_TemplatedMixin',
     'dijit/_WidgetsInTemplateMixin',
     'dijit/layout/ContentPane',
@@ -18,6 +19,7 @@ define([
     'ngw-resource/ResourceBox'
 ], function (declare,
              lang,
+             on,
              _TemplatedMixin,
              _WidgetsInTemplateMixin,
              ContentPane,
@@ -29,6 +31,18 @@ define([
         templateString: hbsI18n(template, i18n),
         title: i18n.gettext('Trail camera detail'),
         prefix: 'trailcam',
+
+        postCreate: function () {
+            var isAutoUpdating = this.isAutoUpdating.get('value');
+
+            this.inherited(arguments);
+
+            this.subjectFilter.set('disabled', !isAutoUpdating);
+
+            on(this.isAutoUpdating, 'change', lang.hitch(this, function (value) {
+                this.subjectFilter.set('disabled', !value);
+            }));
+        },
 
         serializeInMixin: function (data) { },
 

@@ -9,7 +9,7 @@
                required="true"
                title="{{gettext 'Latitude'}}"
                data-ngw-serialize="lat"
-               data-dojo-props="constraints:{min:0,max:90}, invalidMessage:'{{gettext 'Invalid latitude, should be from 0 to 90'}}'"
+               data-dojo-props="constraints:{min:0,max:90,places:5}, invalidMessage:'{{gettext 'Invalid latitude, should be from 0 to 90'}}'"
                style="width: 100%"/>
 
         <input data-dojo-type="dijit/form/NumberTextBox"
@@ -17,17 +17,18 @@
                required="true"
                title="{{gettext 'Longitude'}}"
                data-ngw-serialize="lon"
-               data-dojo-props="constraints:{min:0,max:180}, invalidMessage:'{{gettext 'Invalid longitude, should be from 0 to 180'}}'"
+               data-dojo-props="constraints:{min:0,max:180,places:5}, invalidMessage:'{{gettext 'Invalid longitude, should be from 0 to 180'}}'"
                style="width: 100%"/>
 
         <input data-dojo-type="dijit/form/CheckBox"
+               data-dojo-attach-point="isAutoUpdating"
                name="is_auto"
                title="{{gettext 'Auto updating'}}"
                data-ngw-serialize="is_auto"
-               checked
-               style="width: 100%"/>
+               style=""/>
 
-        <input data-dojo-type="dijit/form/TextBox"
+        <input data-dojo-type="dijit/form/ValidationTextBox"
+               data-dojo-attach-point="subjectFilter"
                name="filter"
                required="true"
                title="{{gettext 'Subject filter'}}"
