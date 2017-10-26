@@ -8,6 +8,6 @@ class TrailcamPlugin(WebmapPlugin):
     @classmethod
     def is_supported(cls, webmap):
         return (
-            'ngw-trailcam/webmap/plugin/TrailcamWebMap',
+            'ngw-trailcam/webmap/TrailcamWebMap',
             dict()
         )
