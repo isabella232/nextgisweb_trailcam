@@ -3,7 +3,7 @@ NextGIS Web extension for trail cameras
 
 ## Installation
 
-`env/bin/pip install -e ./nextgisweb_trailcam`
+`env/bin/pip install -e ./nextgisweb_trailcam/nextgisweb_trailcam`
 
 For translations:
 ```bash

@@ -3,12 +3,13 @@ import sys, os
 
 version = '0.1.0'
 
-requires = (
+requires = [
     'nextgisweb',
     'requests',
     'pyproj',
-    'python-dateutil'
-)
+    'python-dateutil',
+    'geoalchemy2'
+]
 
 entry_points = {
     'nextgisweb.packages': [
@@ -41,5 +42,5 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=requires,
-    entry_points=entry_points,
+    entry_points=entry_points
 )
