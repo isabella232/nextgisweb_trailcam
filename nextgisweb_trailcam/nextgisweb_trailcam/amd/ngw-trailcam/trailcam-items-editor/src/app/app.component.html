@@ -1,0 +1,64 @@
+<div id="main" mdl class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+  <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
+    <div class="mdl-layout__header-row">
+      <span class="mdl-layout-title">{{ title }}</span>
+      <div class="mdl-layout-spacer"></div>
+      <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
+        <i class="material-icons">more_vert</i>
+      </button>
+      <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
+        <li class="mdl-menu__item">Документация</li>
+        <li class="mdl-menu__item">О системе</li>
+        <li class="mdl-menu__item" (click)="logout()">Выход</li>
+      </ul>
+    </div>
+  </header>
+  <div class="demo-drawer mdl-layout__drawer mdl-color--grey-900 mdl-color-text--yellow-800">
+    <header class="demo-drawer-header">
+      <div class="mdl-cell mdl-cell--12-col mdl-typography--text-center">
+
+      </div>
+    </header>
+    <div>
+
+    </div>
+
+  </div>
+  <main class="mdl-layout__content mdl-color--white">
+    <div class="mdl-grid">
+      <div class="mdl-cell mdl-cell--2-col">Фильтр</div>
+      <div class="mdl-cell mdl-cell--5-col">
+        <owl-date-time [(ngModel)]="input2Moment"></owl-date-time>
+      </div>
+      <div class="mdl-cell mdl-cell--5-col">
+        <owl-date-time [(ngModel)]="input2Moment"></owl-date-time>
+      </div>
+    </div>
+    <div class="mdl-grid">
+      <div class="mdl-cell mdl-cell--2-col">Теги</div>
+      <div class="mdl-cell mdl-cell--10-col">
+        <tag-input [(ngModel)]='items' theme='minimal'></tag-input>
+      </div>
+    </div>
+
+    <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+      <div class="mdl-tabs__tab-bar">
+        <a href="#table-panel" class="mdl-tabs__tab is-active">Таблица</a>
+        <a href="#photo-panel" class="mdl-tabs__tab">Фото</a>
+      </div>
+
+      <div class="mdl-tabs__panel is-active" id="table-panel">
+
+      </div>
+      <div class="mdl-tabs__panel" id="photo-panel">
+        <div class="photo-item" *ngFor="let image of images; let i = index">
+          <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-{{i}}">
+            <input id="checkbox-{{i}}" type="checkbox" class="mdl-checkbox__input">
+          </label>
+          <img [src]="image.src" (click)="gallery.set(i)"/>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<gallery-modal></gallery-modal>
