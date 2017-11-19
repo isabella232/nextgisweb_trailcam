@@ -1,0 +1,3 @@
+[run]
+source = trailcam_email_service
+omit = trailcam_email_service/test*
