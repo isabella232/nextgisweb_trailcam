@@ -8,7 +8,8 @@ define([
     'dojo/dom-construct',
     'ngw-pyramid/i18n!basemap',
     'openlayers/ol',
-    './MapTrailcamButton/MapTrailcamButton'
+    './MapTrailcamButton/MapTrailcamButton',
+    './TrailcamPanesManager/TrailcamPanesManager'
 ], function (
     declare,
     array,
@@ -19,18 +20,22 @@ define([
     domConstruct,
     i18n,
     ol,
-    MapTrailcamButton
+    MapTrailcamButton,
+    TrailcamPanesManager
 ) {
     return declare([_PluginBase], {
         _display: null,
+        _trailcamPanesManager: null,
 
         constructor: function (params) {
             this._display = params.display;
+            this._trailcamPanesManager = TrailcamPanesManager.getInstance(this.display);
             this._bindEvents();
         },
 
         _bindEvents: function () {
             topic.subscribe('/webmap/tools/initialized', lang.hitch(this, this.addMapTrailcamButton));
+            this._trailcamPanesManager.bindEvents();
         },
 
         addMapTrailcamButton: function () {
