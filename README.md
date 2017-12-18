@@ -3,9 +3,13 @@ NextGIS Web extension for trail cameras
 
 ## Installation
 
+1. Install nextgisweb_trailcam python package:  
 `env/bin/pip install -e ./nextgisweb_trailcam/nextgisweb_trailcam`
 
-For translations:
+2. Initialize database for the package:  
+`env/bin/nextgisweb --config config.ini initialize_db`
+
+3. Compile translations:
 ```bash
 nextgisweb-i18n --package nextgisweb_trailcam extract trailcam
 nextgisweb-i18n --package nextgisweb_trailcam update trailcam
