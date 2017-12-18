@@ -4,6 +4,11 @@
     <div data-dojo-attach-point="container"
          data-dojo-type="dojox/layout/TableContainer" data-dojo-props="cols:1, labelWidth: 150">
 
+        <input type="hidden"
+               data-dojo-type="dijit/form/TextBox"
+               data-dojo-attach-point="isRegistered"
+               data-ngw-serialize="status"/>
+
         <input data-dojo-attach-point="email"
                data-ngw-serialize="email"
                required="true"

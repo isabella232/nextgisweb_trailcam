@@ -9,7 +9,9 @@ from nextgisweb.resource import (
 from .util import _
 from nextgisweb.models import declarative_base
 from sqlalchemy.ext.declarative import DeclarativeMeta
+from sqlalchemy.dialects.postgresql import ENUM
 import json
+from nextgisweb_trailcam.email_service.email import register_email
 
 Base = declarative_base()
 
@@ -23,6 +25,7 @@ class EmailConnection(Base, Resource):
     imap_server_port = db.Column(db.Integer)
     login = db.Column(db.Unicode)
     password = db.Column(db.Unicode)
+    status = db.Column(ENUM('registered', 'first_pulling', 'ready', 'updating', name='trailcam_email_conn_status_enum'))
 
     __scope__ = DataScope
 
@@ -40,6 +43,20 @@ class EmailConnectionSerializer(Serializer):
     imap_server_port = SerializedProperty(read=DataScope.read, write=DataScope.write)
     login = SerializedProperty(read=DataScope.read, write=DataScope.write)
     password = SerializedProperty(read=DataScope.read, write=DataScope.write)
+    status = SerializedProperty(read=DataScope.read, write=DataScope.write)
+
+    def deserialize(self):
+        if not self.data['status']:
+            register_email(self.data)
+            self.data['is_registered'] = True
+
+        for prop, sp in self.proptab:
+            if prop in self.data and not prop in self.keys:
+                try:
+                    sp.deserialize(self)
+                except Exception as exc:
+                    self.annotate_exception(exc, sp)
+                    raise
 
 
 class TrailcamGroup(Base, Resource):
