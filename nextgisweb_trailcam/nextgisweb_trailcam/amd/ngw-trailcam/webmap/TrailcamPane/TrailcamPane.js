@@ -9,15 +9,15 @@ define([
     'dojo/on',
     'dojox/layout/FloatingPane',
     'ngw/utils/make-singleton',
-    'ngw-tracker/webmap/map/TrackerLayersManager/TrackerLayersManager',
     'ngw-pyramid/i18n!tracker',
     'ngw-pyramid/hbs-i18n',
     'dojo/text!./TrailcamPane.hbs',
     'dijit/form/Button',
-    'ngw-tracker/webmap/TrackersTimeFilter/TrackersTimeFilter'
+    'ngw-trailcam/webmap/TrailcamTimeFilter/TrailcamTimeFilter',
+    'ngw-trailcam/webmap/TrailcamItemsPane/TrailcamItemsPane'
 ], function (declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin,
              lang, dom, domConstruct, on, FloatingPane, MakeSingleton,
-             TrackerLayersManager, i18n, hbsI18n, template) {
+             i18n, hbsI18n, template) {
     return declare('ngw-webmap.TrailcamPane', [], {
         _display: null,
         _floatingPane: null,
