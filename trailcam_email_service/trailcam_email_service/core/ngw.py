@@ -16,3 +16,10 @@ def create_ngw(ngw_info):
     transaction.commit()
     session.close()
     return ngw_instance_id
+
+
+def get_ngw_by_unique_id(ngw_info):
+    existing_ngw_instance = DBSession.query(NgwInstance).filter(NgwInstance.unique_id == ngw_info['unique_id']).all()
+    if existing_ngw_instance:
+        return existing_ngw_instance[0]
+    raise Exception('NgwInstance with unique id {0} not found'.format(ngw_info['unique_id']))
