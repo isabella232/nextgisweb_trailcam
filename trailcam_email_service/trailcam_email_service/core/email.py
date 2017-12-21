@@ -9,15 +9,14 @@ def create_email_connection(email_info, ngw_instance_id):
         raise Exception('NgwInstance with id ==' + ngw_instance_id + ' is not found into database')
     existing_email_connection = DBSession.query(Email).filter(Email.address == email_info['address']).all()
     if existing_email_connection:
-        ngw_instances = existing_email_connection[0].ngw_instances
-        for ngw_i in ngw_instances:
-            if ngw_i.id == ngw_instance_id:
-                return existing_email_connection[0].id
-        existing_email_connection[0].ngw_instances.append(ngw_instance)
-        return existing_email_connection[0].id
+        ngw_instance = existing_email_connection[0].ngw_instance
+        if ngw_instance.id == ngw_instance_id:
+            return existing_email_connection[0].id
+        else:
+            raise Exception('Email "{0}" already assigned with NGW {1}'.format(email_info['address'], ngw_instance.name))
     session = DBSession()
     email_connection = Email(**email_info)
-    email_connection.ngw_instances.append(ngw_instance)
+    email_connection.ngw_instance = ngw_instance
     session.add(email_connection)
     session.flush()
     session.refresh(email_connection)

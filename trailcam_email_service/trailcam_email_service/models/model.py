@@ -1,15 +1,10 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, TIMESTAMP, Binary
+from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, Binary, DateTime
 from sqlalchemy import Table
 from sqlalchemy.orm import (
     relationship
 )
 from trailcam_email_service.models import Base
 from trailcam_email_service.models.jsonify_mixin import JsonifyMixin
-
-ngw_instances_emails_table = Table('ngw_instances_emails', Base.metadata,
-                                   Column('ngw_instance_id', Integer, ForeignKey('ngw_instances.id')),
-                                   Column('email_id', Integer, ForeignKey('emails.id'))
-                                   )
 
 
 class NgwInstance(Base, JsonifyMixin):
@@ -20,7 +15,7 @@ class NgwInstance(Base, JsonifyMixin):
     name = Column(String)
     url = Column(String)
 
-    emails = relationship('Email', secondary=ngw_instances_emails_table, back_populates='ngw_instances')
+    emails = relationship('Email', back_populates='ngw_instance')
 
 
 class Email(Base, JsonifyMixin):
@@ -33,10 +28,11 @@ class Email(Base, JsonifyMixin):
     password = Column(String)
     imap_server = Column(String)
     imap_server_port = Column(Integer, default=933)
-    last_checked = Column(TIMESTAMP)
+    last_checked = Column(DateTime(timezone=True))
     updated = Column(Boolean, default=False)
 
-    ngw_instances = relationship('NgwInstance', secondary=ngw_instances_emails_table, back_populates='emails')
+    ngw_instance_id = Column(Integer, ForeignKey('ngw_instances.id'))
+    ngw_instance = relationship('NgwInstance', back_populates='emails')
     messages = relationship('Message', back_populates='email', lazy='joined')
 
 
@@ -46,9 +42,14 @@ class Message(Base, JsonifyMixin):
     id = Column(Integer, primary_key=True)
     uid = Column(String)
     subject = Column(String)
-    message_date = Column(TIMESTAMP)
-    message_date_received = Column(TIMESTAMP)
-    received = Column(TIMESTAMP)
+    message_date = Column(DateTime(timezone=True))
+    message_date_received = Column(DateTime(timezone=True))
+    received = Column(DateTime(timezone=True))
     message = Column(Binary)
+    image = Column(Binary)
+    image_name = Column(String)
+
+    body = Column(String)
+
     email_id = Column(Integer, ForeignKey('emails.id'))
     email = relationship('Email', back_populates='messages')
