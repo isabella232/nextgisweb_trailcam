@@ -1,9 +1,17 @@
 # -*- coding: utf-8 -*-
-from nextgisweb.env import env
-from nextgisweb_trailcam.util import _
-from pyramid.httpexceptions import HTTPBadRequest, HTTPForbidden
-from ..util import _4326_to_3857
+from pyramid.httpexceptions import HTTPForbidden
 from ..model import Trailcam
+from ..util import _4326_to_3857
+from nextgisweb_trailcam.email_service.trailcam import pull_messages_from_email
+
+
+def run_pull_trailcam_messages(request):
+    trailcam_id = request.matchdict['trailcam_id']
+
+    DBSession = request.env.core.DBSession
+    trailcam = DBSession.query(Trailcam).get(trailcam_id)
+
+    return pull_messages_from_email(trailcam)
 
 
 def get_trailcams(request):
@@ -18,6 +26,7 @@ def get_trailcams(request):
     for trailcam in trailcams:
         lon, lat = _4326_to_3857(trailcam.lon, trailcam.lat)
         result.append({
+            'id': trailcam.id,
             'name': trailcam.display_name,
             'description': trailcam.description,
             'lon': lon,

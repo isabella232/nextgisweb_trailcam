@@ -13,6 +13,7 @@ from sqlalchemy.dialects.postgresql import ENUM
 import json
 from nextgisweb_trailcam.email_service.email import register_email
 
+
 Base = declarative_base()
 
 
@@ -48,7 +49,7 @@ class EmailConnectionSerializer(Serializer):
     def deserialize(self):
         if not self.data['status']:
             register_email(self.data)
-            self.data['is_registered'] = True
+            self.data['status'] = 'first_pulling'
 
         for prop, sp in self.proptab:
             if prop in self.data and not prop in self.keys:
@@ -90,10 +91,14 @@ class TrailcamItem(Base):
     __tablename__ = 'trailcam_items'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    email_uid = db.Column(db.Unicode, index=True)
     name = db.Column(db.Unicode, nullable=False)
     description = db.Column(db.Unicode)
-    received = db.Column(db.TIMESTAMP, nullable=False)
-    file = db.Column(db.Unicode)
+    date_received = db.Column(db.DateTime(timezone=True), nullable=False)
+    date_original = db.Column(db.DateTime(timezone=True), nullable=False)
+    message_body = db.Column(db.Unicode)
+    file = db.Column(db.Binary)
+    file_name = db.Column(db.Unicode)
 
     trailcam_id = db.Column(db.Integer, db.ForeignKey('trailcam.id'))
     trailcam = db.relationship('Trailcam', back_populates='items')
@@ -113,8 +118,7 @@ class Trailcam(Base, Resource):
     filter = db.Column(db.Unicode)
 
     email_connection_id = db.Column(db.ForeignKey(Resource.id), nullable=False)
-    email_connection = db.relationship(
-        Resource, foreign_keys=email_connection_id,
+    email_connection = db.relationship(Resource, foreign_keys=email_connection_id,
         cascade=False, cascade_backrefs=False)
 
     items = db.relationship('TrailcamItem', back_populates='trailcam')
@@ -128,14 +132,25 @@ class TrailcamSerializer(Serializer):
     identity = Trailcam.identity
     resclass = Trailcam
 
-    _defaults = dict(read=DataScope.read,
-                     write=DataScope.write)
+    _defaults = dict(read=DataScope.read, write=DataScope.write)
 
+    id = SerializedProperty(**_defaults)
     lat = SerializedProperty(**_defaults)
     lon = SerializedProperty(**_defaults)
     is_auto = SerializedProperty(**_defaults)
     filter = SerializedProperty(**_defaults)
     email_connection = SerializedResourceRelationship(**_defaults)
+
+    def deserialize(self):
+        for prop, sp in self.proptab:
+            if prop == 'id':
+                continue
+            if prop in self.data and not prop in self.keys:
+                try:
+                    sp.deserialize(self)
+                except Exception as exc:
+                    self.annotate_exception(exc, sp)
+                    raise
 
 
 class AlchemyEncoder(json.JSONEncoder):

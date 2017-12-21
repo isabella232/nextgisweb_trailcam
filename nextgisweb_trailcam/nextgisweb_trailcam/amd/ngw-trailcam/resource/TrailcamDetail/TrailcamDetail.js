@@ -2,6 +2,7 @@ define([
     'dojo/_base/declare',
     'dojo/_base/lang',
     'dojo/on',
+    'dojo/request/xhr',
     'dijit/_TemplatedMixin',
     'dijit/_WidgetsInTemplateMixin',
     'dijit/layout/ContentPane',
@@ -16,10 +17,12 @@ define([
     'dijit/form/ValidationTextBox',
     'dijit/form/NumberTextBox',
     'dijit/form/CheckBox',
-    'ngw-resource/ResourceBox'
+    'ngw-resource/ResourceBox',
+    'dijit/form/Button'
 ], function (declare,
              lang,
              on,
+             xhr,
              _TemplatedMixin,
              _WidgetsInTemplateMixin,
              ContentPane,
@@ -42,10 +45,14 @@ define([
             on(this.isAutoUpdating, 'change', lang.hitch(this, function (value) {
                 this.subjectFilter.set('disabled', !value);
             }));
+
+            on(this.pullButton, 'click', lang.hitch(this, function () {
+                xhr.post(ngwConfig.applicationUrl + '/trailcam/' + this.trailcam_id.get('value') + '/messages/pull');
+            }));
         },
 
-        serializeInMixin: function (data) { },
+        serializeInMixin: function (data) {},
 
-        deserializeInMixin: function (data) { }
+        deserializeInMixin: function (data) {}
     });
 });

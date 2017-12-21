@@ -4,6 +4,11 @@
     <div data-dojo-attach-point="container"
          data-dojo-type="dojox/layout/TableContainer" data-dojo-props="cols:1, labelWidth: 150">
 
+        <input type="hidden"
+               data-dojo-type="dijit/form/TextBox"
+               data-dojo-attach-point="trailcam_id"
+               data-ngw-serialize="id"/>
+
         <input data-dojo-type="dijit/form/NumberTextBox"
                name="lat"
                required="true"
@@ -40,5 +45,13 @@
              data-ngw-serialize="email_connection"
              data-dojo-props="cls: 'trailcam_email_conn'"
              title="{{gettext 'Email connection'}}" style="width: 100%"></div>
+    </div>
+
+    <div width="100%" style="text-align: right;">
+        <div data-dojo-type="dijit/form/Button"
+             data-dojo-attach-point="pullButton"
+             name="pullButton"
+             title="Pull messages">Pull messages
+        </div>
     </div>
 </div>

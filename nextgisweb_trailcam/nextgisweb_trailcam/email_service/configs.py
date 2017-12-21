@@ -1,10 +1,6 @@
-import pyramid
-import requests
-
-from nextgisweb.resource.exception import ValidationError
-
 TRAIL = {
-    'register_email': 'ngw/email/'
+    'register_email': 'ngw/email/',
+    'messages': 'ngw/messages/'
 }
 
 
