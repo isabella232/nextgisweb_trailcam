@@ -6,8 +6,11 @@ define([
     'dojo/on',
     'dijit/form/ToggleButton',
     'ngw-pyramid/i18n!trailcam',
-    'ngw-trailcam/webmap/TrailcamLayer/TrailcamLayer'
-], function (declare, lang, domConstruct, domClass, on, ToggleButton, i18n, TrailcamLayer) {
+    'ngw-trailcam/webmap/LayerTooltip/LayerTooltip',
+    'ngw-trailcam/webmap/TrailcamLayer/TrailcamLayer',
+    'xstyle/css!' + ngwConfig.amdUrl + 'dojox/layout/resources/FloatingPane.css',
+    'xstyle/css!' + ngwConfig.amdUrl + 'dojox/layout/resources/ResizeHandle.css'
+], function (declare, lang, domConstruct, domClass, on, ToggleButton, i18n, LayerTooltip, TrailcamLayer) {
     return declare([ToggleButton], {
         _trailcamLayer: null,
 
@@ -25,6 +28,7 @@ define([
             this.titleNode.appendChild(this.iconNode);
 
             this._trailcamLayer = new TrailcamLayer(this.display.map);
+            new LayerTooltip(this.display.map);
             this.bindEvents();
         },
 
