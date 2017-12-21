@@ -48,7 +48,6 @@ class Message(Base, JsonifyMixin):
     message = Column(Binary)
     image = Column(Binary)
     image_name = Column(String)
-
     body = Column(String)
 
     email_id = Column(Integer, ForeignKey('emails.id'))

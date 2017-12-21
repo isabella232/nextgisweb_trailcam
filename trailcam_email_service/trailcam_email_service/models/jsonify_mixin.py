@@ -1,5 +1,7 @@
 # encoding: utf-8
 import datetime
+import sqlalchemy.types as sql_types
+import base64
 
 
 class JsonifyMixin:
@@ -12,7 +14,9 @@ class JsonifyMixin:
             column_name = c.name
             v = getattr(self, column_name)
             if isinstance(v, datetime.datetime):
-                v = v.strftime('%Y-%m-%d %H:%M:%S')
+                v = v.isoformat()
+            if isinstance(c.type, sql_types.Binary):
+                v = base64.b64encode(v)
             if prefix:
                 column_name = '{}{}'.format(prefix, column_name)
             json_dict[column_name] = v
