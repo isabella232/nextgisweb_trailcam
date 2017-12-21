@@ -10,7 +10,7 @@ def get_ngw_instance_name(request):
 
 def get_ngw_unique_id(current_request):
     # TODO: implement support new identification system of NGW instances
-    return current_request.env.tracker.settings['ngw_unique_id']
+    return current_request.env.trailcam.settings['ngw_unique_id']
 
 
 def get_trailcam_email_service_url(current_request):
