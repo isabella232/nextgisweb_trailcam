@@ -7,6 +7,7 @@ import dateutil.parser
 import datetime
 from nextgisweb.models import DBSession
 import transaction
+from __builtin__ import unicode
 
 
 def pull_messages_from_email(trailcam):
@@ -49,7 +50,7 @@ def pull_messages_from_email(trailcam):
         new_trailcam_item.date_received = dateutil.parser.parse(email_message_info['received'])
         new_trailcam_item.name = email_message_info['subject']
         new_trailcam_item.message_body = email_message_info['body']
-        new_trailcam_item.file = email_message_info['image']
+        new_trailcam_item.file = unicode.encode(email_message_info['image'])
         new_trailcam_item.file_name = email_message_info['image_name']
 
         extra = message_info['extra']

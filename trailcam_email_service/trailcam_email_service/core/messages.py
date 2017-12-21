@@ -1,8 +1,6 @@
-from trailcam_email_service.models import DBSession
-from trailcam_email_service.models.model import Message, Email
+from trailcam_email_service.models import DBSession, Message, Email
 from trailcam_email_service.celery.tasks import get_all_email_messages
 from trailcam_email_service.celery.task_id import get_unique_id_task
-from nextgisweb.models import DBSession
 import re
 
 

@@ -33,6 +33,7 @@ class Email(Base, JsonifyMixin):
 
     ngw_instance_id = Column(Integer, ForeignKey('ngw_instances.id'))
     ngw_instance = relationship('NgwInstance', back_populates='emails')
+
     messages = relationship('Message', back_populates='email', lazy='joined')
 
 
