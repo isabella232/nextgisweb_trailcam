@@ -8,7 +8,9 @@ requires = [
     'requests',
     'pyproj',
     'python-dateutil',
-    'geoalchemy2'
+    'geoalchemy2',
+    'Pillow',
+    'python-resize-image'
 ]
 
 entry_points = {

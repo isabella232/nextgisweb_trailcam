@@ -11,6 +11,7 @@ from nextgisweb.models import declarative_base
 from sqlalchemy.ext.declarative import DeclarativeMeta
 from sqlalchemy.dialects.postgresql import ENUM
 import json
+from jsonify_mixin import JsonifyMixin
 from nextgisweb_trailcam.email_service.email import register_email
 
 
@@ -87,7 +88,7 @@ class TrailcamItemTag(Base):
     items = db.relationship('TrailcamItem', secondary=trailcam_items_tags_table, back_populates='tags')
 
 
-class TrailcamItem(Base):
+class TrailcamItem(Base, JsonifyMixin):
     __tablename__ = 'trailcam_items'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -97,8 +98,10 @@ class TrailcamItem(Base):
     date_received = db.Column(db.DateTime(timezone=True), nullable=False)
     date_original = db.Column(db.DateTime(timezone=True), nullable=False)
     message_body = db.Column(db.Unicode)
-    file = db.Column(db.Binary)
     file_name = db.Column(db.Unicode)
+    file_path = db.Column(db.Unicode)
+    file_path_thumbnail = db.Column(db.Unicode)
+    file_size = db.Column(db.BigInteger)
 
     trailcam_id = db.Column(db.Integer, db.ForeignKey('trailcam.id'))
     trailcam = db.relationship('Trailcam', back_populates='items')

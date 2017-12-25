@@ -7,6 +7,7 @@ import dateutil.parser
 import datetime
 from nextgisweb.models import DBSession
 import transaction
+from nextgisweb_trailcam.core.images_store import write_image
 from __builtin__ import unicode
 
 
@@ -40,9 +41,10 @@ def pull_messages_from_email(trailcam):
 
     messages_info = response.json()
 
-    from nextgisweb_trailcam.model import TrailcamItem
+    from nextgisweb_trailcam.model import Trailcam, TrailcamItem
     session = DBSession()
 
+    trailcam = session.query(Trailcam).get(trailcam.id)
     for message_info in messages_info:
         new_trailcam_item = TrailcamItem()
         email_message_info = message_info['message']
@@ -50,15 +52,23 @@ def pull_messages_from_email(trailcam):
         new_trailcam_item.date_received = dateutil.parser.parse(email_message_info['received'])
         new_trailcam_item.name = email_message_info['subject']
         new_trailcam_item.message_body = email_message_info['body']
-        new_trailcam_item.file = unicode.encode(email_message_info['image'])
+
         new_trailcam_item.file_name = email_message_info['image_name']
+        image_file_info = write_image(current_request,
+                                      unicode.encode(email_message_info['image']),
+                                      new_trailcam_item.file_name)
+
+        new_trailcam_item.file_path = image_file_info['file_path']
+        new_trailcam_item.file_path_thumbnail = image_file_info['file_path_thumbnail']
+        new_trailcam_item.file_size = image_file_info['file_size']
 
         extra = message_info['extra']
         if 'month' in extra and 'day' in extra and 'hour' in extra and 'minutes' in extra:
             datetime_original = datetime.datetime(2017, int(extra['month']), int(extra['day']),
                                                   int(extra['hour']), int(extra['minutes']))
-            new_trailcam_item.date_original = datetime_original
+        new_trailcam_item.date_original = datetime_original
 
+        new_trailcam_item.trailcam = trailcam
         session.add(new_trailcam_item)
 
     transaction.commit()
