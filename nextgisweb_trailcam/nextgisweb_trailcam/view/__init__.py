@@ -7,6 +7,8 @@ from trailcam_items import *
 
 
 def setup_pyramid(comp, config):
+    config.add_static_view(name='/trailcam/media/', path=comp.settings['storage_path'])
+
     config.add_route(
         'pyramid.control_panel.trailcam',
         '/control-panel/trailcam'
@@ -22,12 +24,14 @@ def setup_pyramid(comp, config):
         client=()).add_view(get_amd_static_url)
 
     config.add_route(
-        'trailcam.items',
+        'trailcam.api.items',
         '/trailcam/{trailcam_id}/items/',
-        client=('trailcam_id',)).add_view(trailcam_items_editor,
-                                          renderer='nextgisweb_trailcam:template/trailcam_items.mako')
+        client=('trailcam_id',)) \
+        .add_view(get_trailcam_items, renderer='json', request_method='GET')
 
-    config.add_route('trailcam.trailcams', '/api/trailcam/trailcams') \
+    config.add_route(
+        'trailcam.api.trailcams',
+        '/api/trailcam/trailcams') \
         .add_view(get_trailcams, request_method='GET', renderer='json')
 
     config.add_route('trailcam.messages.pull', '/trailcam/{trailcam_id}/messages/pull', client=('trailcam_id',)) \
