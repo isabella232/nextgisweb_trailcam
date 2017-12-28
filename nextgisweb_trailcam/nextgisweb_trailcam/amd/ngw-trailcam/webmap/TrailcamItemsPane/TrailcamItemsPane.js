@@ -22,22 +22,16 @@ define([
             templateString: template,
             trailcamId: null,
 
-            constructor: function () {
-                this._bindEvents();
-            },
+            updateItems: function (from, to, trailcamId) {
+                if (trailcamId !== this.trailcamId) return false;
 
-            _bindEvents: function () {
-                topic.subscribe('/webmap/trailcam/time-filter/changed', lang.hitch(this, function (from, to, trailcamId) {
-                    if (trailcamId !== this.trailcamId) return false;
-
-                    xhr(ngwConfig.applicationUrl + '/trailcam/' + this.trailcamId + '/items/', {
-                        handleAs: "json"
-                    }).then(lang.hitch(this, function (imagesInfo) {
-                        this.buildImages(imagesInfo);
-                    }), function (err) {
-                        console.log(err);
-                    });
-                }));
+                xhr(ngwConfig.applicationUrl + '/trailcam/' + this.trailcamId + '/items/', {
+                    handleAs: "json"
+                }).then(lang.hitch(this, function (imagesInfo) {
+                    this.buildImages(imagesInfo);
+                }), function (err) {
+                    console.log(err);
+                });
             },
 
             buildImages: function (imagesInfo) {

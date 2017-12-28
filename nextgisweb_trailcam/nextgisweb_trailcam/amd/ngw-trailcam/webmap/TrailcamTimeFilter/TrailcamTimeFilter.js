@@ -3,6 +3,7 @@ define([
     'dojo/_base/lang',
     'dojo/dom-construct',
     'dojo/on',
+    'dojo/Evented',
     'dojo/topic',
     'dojo/ready',
     'dojo/fx',
@@ -18,7 +19,7 @@ define([
     'xstyle/css!./TrailcamTimeFilter.css',
     'xstyle/css!ngw-trailcam/contrib/datetimepicker/jquery.datetimepicker.min.css',
     'ngw-trailcam/contrib/jquery/jquery-3.2.1.min'
-], function (declare, lang, domConstruct, on, topic, ready, fx, Deferred, locale, stamp, all,
+], function (declare, lang, domConstruct, on, Evented, topic, ready, fx, Deferred, locale, stamp, all,
              _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin,
              i18n, template) {
 
@@ -50,11 +51,11 @@ define([
     };
 
     return declare('webmap.trailcam.TrailcamTimeFilter',
-        [_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin],
+        [_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, Evented],
         {
             templateString: template,
             trailcamId: null,
-            _startupDef: new Deferred(),
+            _startupDef: null,
             dateFrom: locale.format(getPreviousDayDate(), {
                 datePattern: 'yyyy/MM/dd HH:mm',
                 selector: 'date'
@@ -67,6 +68,7 @@ define([
             $elTo: null,
 
             constructor: function () {
+                this._startupDef = new Deferred();
                 all([jQueryDeferred, this._startupDef.promise]).then(lang.hitch(this, this.initializeDateTimeSelectors));
             },
 
@@ -74,32 +76,42 @@ define([
                 var context = this,
                     $elFrom, $elTo;
 
-                $elFrom = this.$elFrom = $('#trailcamePane_' + this.trailcamId + ' .elFrom');
-                $elTo = this.$elTo = $('#trailcamePane_' + this.trailcamId + ' .elTo');
+                $elFrom = this.$elFrom = $('#trailcamPane_' + this.trailcamId + ' .elFrom');
+                $elTo = this.$elTo = $('#trailcamPane_' + this.trailcamId + ' .elTo');
 
                 $elFrom.datetimepicker({
                     onChangeDateTime: function (dp, $input) {
-                        topic.publish('/webmap/trailcam/time-filter/changed',
-                            context._removeTimeZoneOffset(dp), context._removeTimeZoneOffset($elTo.datetimepicker('getValue')));
+                        context._onChangeDateTime(
+                            context._removeTimeZoneOffset(dp),
+                            context._removeTimeZoneOffset($elTo.datetimepicker('getValue'))
+                        );
                     }
                 });
 
                 $elTo.datetimepicker({
                     onChangeDateTime: function (dp, $input) {
-                        topic.publish('/webmap/trailcam/time-filter/changed',
-                            context._removeTimeZoneOffset($elFrom.datetimepicker('getValue')), context._removeTimeZoneOffset(dp));
+                        context._onChangeDateTime(
+                            context._removeTimeZoneOffset($elFrom.datetimepicker('getValue')),
+                            context._removeTimeZoneOffset(dp)
+                        );
                     }
                 });
-
-                topic.publish('/webmap/trailcam/time-filter/changed',
-                    context._removeTimeZoneOffset($elFrom.datetimepicker('getValue')),
-                    context._removeTimeZoneOffset($elTo.datetimepicker('getValue')));
-
-                this._bindEvents();
             },
 
-            _bindEvents: function () {
+            _onChangeDateTime: function (from, to) {
+                this.emit('changed', {
+                    from: from,
+                    to: to,
+                    trailcamId: this.trailcamId
+                });
+            },
 
+            getCurrentData: function () {
+                return {
+                    from: this._removeTimeZoneOffset(this.$elFrom.datetimepicker('getValue')),
+                    to: this._removeTimeZoneOffset(this.$elTo.datetimepicker('getValue')),
+                    trailcamId: this.trailcamId
+                }
             },
 
             _setDate: function ($el, date) {

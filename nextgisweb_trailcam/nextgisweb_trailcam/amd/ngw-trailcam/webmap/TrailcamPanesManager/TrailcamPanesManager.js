@@ -5,11 +5,12 @@ define([
     'dojo/dom-construct',
     'dojo/on',
     'dojo/topic',
+    'dijit/registry',
     'ngw/utils/make-singleton',
-    'ngw-pyramid/i18n!tracker',
+    'ngw-pyramid/i18n!trailcam',
     '../TrailcamPane/TrailcamPane'
-], function (declare, lang, dom, domConstruct, on, topic, MakeSingleton,
-             i18n, TrailcamPane) {
+], function (declare, lang, dom, domConstruct, on, topic,
+             registry, MakeSingleton, i18n, TrailcamPane) {
     return MakeSingleton(declare('ngw-webmap.TrailcamPanesManager', [], {
         _display: null,
         _panes: {},
@@ -23,8 +24,12 @@ define([
         },
 
         showTrailcamPane: function (trailcamFeature) {
-            var trailcamPane = new TrailcamPane(this._display, trailcamFeature);
-            this._panes[trailcamFeature.props.id] = trailcamPane;
+            var paneWidget = registry.byId('trailcamPane_' + trailcamFeature.props.id),
+                trailcamPane;
+            if (paneWidget) {
+                return false;
+            }
+            trailcamPane = new TrailcamPane(this._display, trailcamFeature);
             trailcamPane.show();
         }
     }));
