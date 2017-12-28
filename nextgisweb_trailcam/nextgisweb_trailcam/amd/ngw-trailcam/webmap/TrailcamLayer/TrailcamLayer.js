@@ -104,7 +104,9 @@ define([
                 featureTrailcam.getTooltipHtml = function () {
                     var html = '';
                     html += '<div class="row">' + i18n.gettext('Name') + ': ' + this.props.name + '</div>';
-                    html += '<div class="row">' + i18n.gettext('Description') + ': ' + this.props.description + '</div>';
+                    if (this.props.description) {
+                        html += '<div class="row">' + i18n.gettext('Description') + ': ' + this.props.description + '</div>';
+                    }
                     return html;
                 };
 
@@ -120,13 +122,19 @@ define([
             this._map.olMap.removeEventListener('click', this._onTrailcamPointClick);
         },
 
-        _onTrailcamPointClick: function(event) {
-            var map = event.map;
+        _onTrailcamPointClick: function (event) {
+            var map = event.map,
+                features = [];
+
             map.forEachFeatureAtPixel(event.pixel, function (feature, layer) {
                 if (feature.props.type === 'trailcam') {
-                    topic.publish('/webmap/trailcam/pane/show', feature);
+                    features.push(feature);
                 }
             });
+
+            if (features.length > 0) {
+                topic.publish('/webmap/trailcam/pane/show', features[0]);
+            }
         }
     });
 });
