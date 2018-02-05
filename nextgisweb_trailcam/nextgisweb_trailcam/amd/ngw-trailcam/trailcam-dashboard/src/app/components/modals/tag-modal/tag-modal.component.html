@@ -1,0 +1,24 @@
+<ng-template #customTemplate>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group form-black is-empty">
+          <input type="text" class="form-control" placeholder="{{'Tag name' | translate}}">
+          <span class="material-input"></span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group form-black is-empty">
+          <input type="text" class="form-control" placeholder="{{'Description' | translate}}">
+          <span class="material-input"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<app-modal-base #modalBase
+                [title]="title"
+                [modalBodyTemplate]="customTemplate"></app-modal-base>

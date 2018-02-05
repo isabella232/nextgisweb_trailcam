@@ -1,0 +1,59 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header" data-background-color="red">
+            <h4 class="title">{{'Tags table' | translate}}</h4>
+            <p class="category">{{'Tags table dsr' | translate}}</p>
+          </div>
+          <div class="card-content">
+            <form class="table-controls">
+              <div class="row">
+                <div class="col-md-6">
+                  <button type="button"
+                          (click)="onCreate($event)"
+                          class="btn btn-table-create btn-just-icon">
+                    <i class="material-icons">add</i>
+                    <div class="ripple-container"></div>
+                  </button>
+                  <button type="button" class="btn btn-table-edit btn-just-icon">
+                    <i class="material-icons">edit</i>
+                    <div class="ripple-container"></div>
+                  </button>
+                  <button type="button" class="btn btn-table-delete btn-just-icon">
+                    <i class="material-icons">delete</i>
+                    <div class="ripple-container"></div>
+                  </button>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group form-black is-empty">
+                    <input type="text" class="form-control" placeholder="Search">
+                    <span class="material-input"></span>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div class="row">
+              <div class="col-md-12">
+                <ngx-datatable
+                  class="bootstrap"
+                  [rows]="rows"
+                  [columns]="columns"
+                  [columnMode]="'force'"
+                  [externalPaging]="true"
+                  [count]="page.totalElements"
+                  [offset]="page.pageNumber"
+                  [limit]="page.size"
+                  (page)='setPage($event)'
+                  (sort)="onSort($event)">
+                </ngx-datatable>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-tag-modal #modal></app-tag-modal>
+</div>
