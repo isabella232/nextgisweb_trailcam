@@ -4,6 +4,8 @@ from .resource import *
 from .trailcam import *
 from .util import *
 from trailcam_items import *
+from trailcam_items_tags import *
+from dashboard import *
 
 
 def setup_pyramid(comp, config):
@@ -24,6 +26,12 @@ def setup_pyramid(comp, config):
         client=()).add_view(get_amd_static_url)
 
     config.add_route(
+        'trailcam.dashboard',
+        '/trailcam/{trailcam_id}/dashboard/',
+        client=('trailcam_id',)) \
+        .add_view(dashboard, renderer='nextgisweb_trailcam:template/trailcam_dashboard.mako')
+
+    config.add_route(
         'trailcam.api.items',
         '/trailcam/{trailcam_id}/items/',
         client=('trailcam_id',)) \
@@ -33,6 +41,13 @@ def setup_pyramid(comp, config):
         'trailcam.api.trailcams',
         '/api/trailcam/trailcams') \
         .add_view(get_trailcams, request_method='GET', renderer='json')
+
+    config.add_route(
+        'trailcam.tags', '/api/trailcam/tags') \
+        .add_view(get_tags, request_method='GET', renderer='json') \
+        .add_view(create_tag, request_method='POST', renderer='json') \
+        .add_view(update_tag, request_method='PUT', renderer='json') \
+        .add_view(delete_tag, request_method='DELETE', renderer='json')
 
     config.add_route('trailcam.messages.pull', '/trailcam/{trailcam_id}/messages/pull', client=('trailcam_id',)) \
         .add_view(run_pull_trailcam_messages, request_method='POST', renderer='json')
