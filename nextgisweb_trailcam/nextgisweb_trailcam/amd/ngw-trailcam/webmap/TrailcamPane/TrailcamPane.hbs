@@ -10,11 +10,11 @@
             </div>
             <button id="trailcamEditorBtn_{{trailcamId}}"
                     data-dojo-type="dijit/form/Button"
-                    data-dojo-props="iconClass:'dijitIconEdit', showLabel: true"
+                    data-dojo-props="iconClass:'dijitIconEdit', showLabel: false"
+                    title="{{gettext 'Dashboard'}}"
                     type="button">
-                {{gettext 'Editor'}}
                 <script type="dojo/connect" data-dojo-event="onClick">
-                    var win = window.open(ngwConfig.applicationUrl + '/tracker/reports/', '_blank');
+                    var win = window.open(ngwConfig.applicationUrl + '/trailcam/' + {{trailcamId}} + '/dashboard/', '_blank');
                     win.focus();
                 </script>
             </button>
