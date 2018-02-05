@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nextgisweb_trailcam 0.0dev-r0\n"
 "Report-Msgid-Bugs-To: info@nextgis.ru\n"
-"POT-Creation-Date: 2017-10-26 15:32+0300\n"
+"POT-Creation-Date: 2018-02-05 12:08+0300\n"
 "PO-Revision-Date: 2017-07-24 11:00+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -20,56 +20,56 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-#: amd/ngw-trailcam/resource/TrailcamDetail/TrailcamDetail.hbs:42 model.py:17
+#: amd/ngw-trailcam/resource/TrailcamDetail/TrailcamDetail.hbs:47 model.py:26
 msgid "Email connection"
 msgstr "Email соединение"
 
-#: amd/ngw-trailcam/webmap/MapTrailcamButton/MapTrailcamButton.js:17
-#: model.py:45 view/settings.py:57
+#: amd/ngw-trailcam/webmap/MapTrailcamButton/MapTrailcamButton.js:20
+#: model.py:69 view/settings.py:57
 msgid "Trail cameras"
 msgstr "Фотоловушки"
 
-#: model.py:56
+#: model.py:117
 msgid "Trail camera"
 msgstr "Фотоловушка"
 
-#: amd/ngw-trailcam/resource/EmailConnectionDetail/EmailConnectionDetail.hbs:10
+#: amd/ngw-trailcam/resource/EmailConnectionDetail/EmailConnectionDetail.hbs:15
 msgid "Email address"
 msgstr "Email адрес"
 
-#: amd/ngw-trailcam/resource/EmailConnectionDetail/EmailConnectionDetail.hbs:12
+#: amd/ngw-trailcam/resource/EmailConnectionDetail/EmailConnectionDetail.hbs:17
 msgid "Invalid email"
 msgstr "Невалидный email"
 
-#: amd/ngw-trailcam/resource/EmailConnectionDetail/EmailConnectionDetail.hbs:17
+#: amd/ngw-trailcam/resource/EmailConnectionDetail/EmailConnectionDetail.hbs:22
 msgid "IMAP server address"
 msgstr "Адреса IMAP сервера"
 
-#: amd/ngw-trailcam/resource/EmailConnectionDetail/EmailConnectionDetail.hbs:19
+#: amd/ngw-trailcam/resource/EmailConnectionDetail/EmailConnectionDetail.hbs:24
 msgid "Please enter IMAP server address"
 msgstr "Введите адрес IMAP сервера"
 
-#: amd/ngw-trailcam/resource/EmailConnectionDetail/EmailConnectionDetail.hbs:25
+#: amd/ngw-trailcam/resource/EmailConnectionDetail/EmailConnectionDetail.hbs:30
 msgid "IMAP port"
 msgstr "Порт IMAP сервера"
 
-#: amd/ngw-trailcam/resource/EmailConnectionDetail/EmailConnectionDetail.hbs:27
+#: amd/ngw-trailcam/resource/EmailConnectionDetail/EmailConnectionDetail.hbs:32
 msgid "Invalid port, should be from 1 to 65535"
 msgstr "Невалидный порт, ожидается от 1 до 65535"
 
-#: amd/ngw-trailcam/resource/EmailConnectionDetail/EmailConnectionDetail.hbs:33
+#: amd/ngw-trailcam/resource/EmailConnectionDetail/EmailConnectionDetail.hbs:38
 msgid "Login"
 msgstr "Логин"
 
-#: amd/ngw-trailcam/resource/EmailConnectionDetail/EmailConnectionDetail.hbs:35
+#: amd/ngw-trailcam/resource/EmailConnectionDetail/EmailConnectionDetail.hbs:40
 msgid "Please enter login to your email box"
 msgstr "Введите логин к email"
 
-#: amd/ngw-trailcam/resource/EmailConnectionDetail/EmailConnectionDetail.hbs:42
+#: amd/ngw-trailcam/resource/EmailConnectionDetail/EmailConnectionDetail.hbs:47
 msgid "Password"
 msgstr "Пароль"
 
-#: amd/ngw-trailcam/resource/EmailConnectionDetail/EmailConnectionDetail.hbs:44
+#: amd/ngw-trailcam/resource/EmailConnectionDetail/EmailConnectionDetail.hbs:49
 msgid "Please enter password to your email box"
 msgstr "Введите пароль к email"
 
@@ -77,31 +77,31 @@ msgstr "Введите пароль к email"
 msgid "Email connection detail"
 msgstr "Email соединение"
 
-#: amd/ngw-trailcam/resource/TrailcamDetail/TrailcamDetail.hbs:10
+#: amd/ngw-trailcam/resource/TrailcamDetail/TrailcamDetail.hbs:15
 msgid "Latitude"
 msgstr "Широта"
 
-#: amd/ngw-trailcam/resource/TrailcamDetail/TrailcamDetail.hbs:12
+#: amd/ngw-trailcam/resource/TrailcamDetail/TrailcamDetail.hbs:17
 msgid "Invalid latitude, should be from 0 to 90"
 msgstr "Невалидная широта, ожидается от 0 до 90"
 
-#: amd/ngw-trailcam/resource/TrailcamDetail/TrailcamDetail.hbs:18
+#: amd/ngw-trailcam/resource/TrailcamDetail/TrailcamDetail.hbs:23
 msgid "Longitude"
 msgstr "Долгота"
 
-#: amd/ngw-trailcam/resource/TrailcamDetail/TrailcamDetail.hbs:20
+#: amd/ngw-trailcam/resource/TrailcamDetail/TrailcamDetail.hbs:25
 msgid "Invalid longitude, should be from 0 to 180"
 msgstr "Невалидная долгота, ожидается от 0 до 180"
 
-#: amd/ngw-trailcam/resource/TrailcamDetail/TrailcamDetail.hbs:26
+#: amd/ngw-trailcam/resource/TrailcamDetail/TrailcamDetail.hbs:31
 msgid "Auto updating"
 msgstr "Авто-обновление"
 
-#: amd/ngw-trailcam/resource/TrailcamDetail/TrailcamDetail.hbs:34
+#: amd/ngw-trailcam/resource/TrailcamDetail/TrailcamDetail.hbs:39
 msgid "Subject filter"
 msgstr "Фильтр по теме email"
 
-#: amd/ngw-trailcam/resource/TrailcamDetail/TrailcamDetail.js:32
+#: amd/ngw-trailcam/resource/TrailcamDetail/TrailcamDetail.js:35
 msgid "Trail camera detail"
 msgstr "Фотоловушка"
 
@@ -125,13 +125,37 @@ msgstr "Настройки фотоловушек успешно сохране�
 msgid "Error, trail cameras settings not has been saved!"
 msgstr "Ошибка, настройки фотоловушек не были сохранены!"
 
-#: amd/ngw-trailcam/webmap/TrailcamLayer/TrailcamLayer.js:97
+#: amd/ngw-trailcam/webmap/TrailcamLayer/TrailcamLayer.js:106
 msgid "Name"
 msgstr "Название"
 
-#: amd/ngw-trailcam/webmap/TrailcamLayer/TrailcamLayer.js:98
+#: amd/ngw-trailcam/webmap/TrailcamLayer/TrailcamLayer.js:108
 msgid "Description"
 msgstr "Описание"
+
+#: amd/ngw-trailcam/webmap/TrailcamPane/TrailcamPane.hbs:15
+msgid "Dashboard"
+msgstr "Панель управления"
+
+#: amd/ngw-trailcam/webmap/TrailcamPane/TrailcamPane.js:50
+msgid "Trailcam"
+msgstr "Фотоловушка"
+
+#: email_service/email.py:32 email_service/trailcam.py:38
+msgid "The email is not registered on NextGIS Email System. Try later, please."
+msgstr "Email не зарегистрирован в NextGIS Email System. Попробуйте позже."
+
+#: email_service/email.py:34 email_service/trailcam.py:40
+msgid "NextGIS Email System is unavailable. Try later, please."
+msgstr "Система NextGIS Email недоступна. Попробуйте позже."
+
+#: template/trailcam_dashboard.mako:7
+msgid "Trail camera dashboard"
+msgstr "Панель управления фотоловушкой"
+
+#: template/trailcam_editor.mako:8
+msgid "Trail camera content editor"
+msgstr ""
 
 #: view/settings.py:15
 msgid "Trail cameras module settings"
