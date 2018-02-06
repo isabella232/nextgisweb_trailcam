@@ -29,7 +29,7 @@ def setup_pyramid(comp, config):
         'trailcam.dashboard',
         '/trailcam/{trailcam_id}/dashboard/',
         client=('trailcam_id',)) \
-        .add_view(dashboard, renderer='nextgisweb_trailcam:template/trailcam_dashboard.mako')
+        .add_view(trailcam_dashboard, renderer='nextgisweb_trailcam:template/trailcam_dashboard.mako')
 
     config.add_route(
         'trailcam.api.items',

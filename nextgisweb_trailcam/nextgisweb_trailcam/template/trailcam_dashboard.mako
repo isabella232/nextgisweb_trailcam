@@ -1,4 +1,5 @@
 <%! from nextgisweb_trailcam.util import _ %>
+<%! import json %>
 
 <!doctype html>
 <html lang="en">
@@ -22,6 +23,7 @@
             trailcam_lat: ${trailcam.lat},
             trailcam_lon: ${trailcam.lon},
             items_count: ${items_count},
+            items_count_by_7_days: ${json.dumps([{"d": i[0], "c": i[1]} for i in items_count_by_7_days] )| n},
             ngw_root_url: "${request.application_url}"
         };
     </script>
