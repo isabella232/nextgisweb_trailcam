@@ -1,8 +1,9 @@
 import {FormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {BrowserModule, Title} from '@angular/platform-browser';
-import {APP_INITIALIZER, Injector, NgModule} from '@angular/core';
-import {LOCATION_INITIALIZED} from '@angular/common';
+import {APP_INITIALIZER, Injector, LOCALE_ID, NgModule} from '@angular/core';
+import {DatePipe, LOCATION_INITIALIZED, registerLocaleData} from '@angular/common';
+import localeRu from '@angular/common/locales/ru';
 
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
@@ -28,6 +29,9 @@ import {TagsComponent} from './components/tags/tags.component';
 import {TitleService} from './components/services/title.service';
 import {TagService} from './services/tag.service';
 
+if (config['locale'] === 'ru') {
+  registerLocaleData(localeRu);
+}
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, config['assets_path'] + 'i18n/', '.json');
@@ -84,9 +88,14 @@ export function appInitializerFactory(translate: TranslateService, injector: Inj
       deps: [TranslateService, Injector],
       multi: true
     },
+    {
+      provide: LOCALE_ID,
+      useValue: config['locale']
+    },
     TitleService,
     TagService,
-    Title
+    Title,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

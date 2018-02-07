@@ -13,7 +13,7 @@ const routes: Routes = [
   {path: 'media', component: MediaComponent},
   {path: 'tags', component: TagsComponent},
   {path: 'email', component: EmailComponent},
-  {path: 'upload', component: UploadComponent}
+  {path: 'upload', component: UploadComponent},
   {path: '', redirectTo: 'start', pathMatch: 'full'}
 ];
 
