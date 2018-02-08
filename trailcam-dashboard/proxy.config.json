@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "http://192.168.152.128:6544",
+    "target": "YOUR NGW URL",
     "logLevel": "debug"
   }
 }

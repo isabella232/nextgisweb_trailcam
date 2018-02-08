@@ -13,6 +13,8 @@ The front-end Angular 5 application for NextGIS Web extension for trail cameras
 or building production version:  
 `npm build`
 
+3. If you're running dev server you should to change target URL into `proxy.config.json`.
+
 License
 -------------
 This program is licensed under GNU GPL v2 or any later version
