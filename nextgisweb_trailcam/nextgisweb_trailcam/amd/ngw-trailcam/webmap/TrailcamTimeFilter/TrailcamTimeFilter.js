@@ -17,8 +17,8 @@ define([
     'ngw-pyramid/i18n!webmap',
     'dojo/text!./TrailcamTimeFilter.hbs',
     'xstyle/css!./TrailcamTimeFilter.css',
-    'xstyle/css!ngw-trailcam/contrib/datetimepicker/jquery.datetimepicker.min.css',
-    'ngw-trailcam/contrib/jquery/jquery-3.2.1.min'
+    'xstyle/css!jquery/datetimepicker/jquery.datetimepicker.min.css',
+    'jquery/jquery/jquery-3.2.1.min'
 ], function (declare, lang, domConstruct, on, Evented, topic, ready, fx, Deferred, locale, stamp, all,
              _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin,
              i18n, template) {
@@ -26,9 +26,9 @@ define([
     var jQueryDeferred = new Deferred();
 
     ready(function () {
-        require(['ngw-trailcam/contrib/jquery.mousewheel/jquery.mousewheel'], function () {
+        require(['jquery/jquery.mousewheel/jquery.mousewheel'], function () {
             ready(function () {
-                require(['ngw-trailcam/contrib/datetimepicker/jquery.datetimepicker.full'], function () {
+                require(['jquery/datetimepicker/jquery.datetimepicker.full'], function () {
                     ready(function () {
                         jQueryDeferred.resolve();
                     });
