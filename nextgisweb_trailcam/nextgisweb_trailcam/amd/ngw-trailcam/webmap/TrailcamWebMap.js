@@ -39,7 +39,15 @@ define([
         },
 
         addMapTrailcamButton: function () {
-            this._display.mapToolbar.items.addButton(MapTrailcamButton, {
+            var mapToolbar = this._display.mapToolbar;
+
+            if (!mapToolbar ||
+                !mapToolbar.hasOwnProperty('items') ||
+                !mapToolbar.items instanceof Array) {
+                return false;
+            }
+
+            mapToolbar.items.addButton(MapTrailcamButton, {
                 display: this._display
             });
         },
