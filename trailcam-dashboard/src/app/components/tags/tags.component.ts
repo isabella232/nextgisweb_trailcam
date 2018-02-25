@@ -58,7 +58,7 @@ export class TagsComponent extends TitleBaseComponent implements OnInit {
   }
 
   onCreate(event) {
-    this.modal.open({});
+    this.modal.open(new Tag(), false);
   }
 
   onSave(event) {

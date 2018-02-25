@@ -1,4 +1,5 @@
 import {Component, ElementRef, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
 
 const $ = window['jQuery'];
 
@@ -9,8 +10,8 @@ const $ = window['jQuery'];
 })
 export class ModalBaseComponent implements OnInit {
   @Input() modalBodyTemplate: TemplateRef<any>;
+  @Input() title: string;
   @ViewChild('modal') modal: ElementRef;
-  title = 'Empty title';
 
   constructor() {
   }

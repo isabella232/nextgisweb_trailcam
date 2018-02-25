@@ -1,7 +1,7 @@
 {
   "AppName": "NextGIS Web Trailcam - ",
   "Close": "Close",
-  "Save": 'Save',
+  "Save": "Save",
   "Dashboard": "Dashboard",
   "items": "items",
   "Photos": "Photos/Videos",
@@ -16,5 +16,7 @@
   "Description": "Description",
   "Tags table": "Tags table",
   "GoToNextGIS": "Go to NextGIS site",
-  "Tags table dsr": "These tags can be applied to photos/videos from your trail cameras"
+  "Tags table dsr": "These tags can be applied to photos/videos from your trail cameras",
+  "Edit tag": "Edit tag",
+  "Create tag": "Create tag"
 }

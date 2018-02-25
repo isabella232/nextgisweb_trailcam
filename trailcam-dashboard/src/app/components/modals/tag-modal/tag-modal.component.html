@@ -3,7 +3,8 @@
     <div class="row">
       <div class="col-md-12">
         <div class="form-group form-black is-empty">
-          <input type="text" class="form-control" placeholder="{{'Tag name' | translate}}">
+          <input [(ngModel)]="tag.name"
+            type="text" class="form-control" placeholder="{{'Tag name' | translate}}" >
           <span class="material-input"></span>
         </div>
       </div>
@@ -11,7 +12,8 @@
     <div class="row">
       <div class="col-md-12">
         <div class="form-group form-black is-empty">
-          <input type="text" class="form-control" placeholder="{{'Description' | translate}}">
+          <input [(ngModel)]="tag.description"
+                 type="text" class="form-control" placeholder="{{'Description' | translate}}">
           <span class="material-input"></span>
         </div>
       </div>
@@ -21,4 +23,5 @@
 
 <app-modal-base #modalBase
                 [title]="title"
-                [modalBodyTemplate]="customTemplate"></app-modal-base>
+                [modalBodyTemplate]="customTemplate">
+</app-modal-base>
