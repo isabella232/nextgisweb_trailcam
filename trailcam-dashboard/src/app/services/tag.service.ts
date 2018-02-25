@@ -4,7 +4,7 @@ import {PagedData} from '../models/view/paged-data';
 import {Tag} from '../models/tag';
 import {config} from '../app.config';
 import {TableBaseService} from './table-base.service';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class TagService extends TableBaseService {
@@ -24,5 +24,10 @@ export class TagService extends TableBaseService {
         },
         err => console.error(err));
     });
+  }
+
+  create(tag: Tag) {
+    const body = JSON.stringify(tag);
+    return this.http.post('', body);
   }
 }
