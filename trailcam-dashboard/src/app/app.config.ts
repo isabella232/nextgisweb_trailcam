@@ -7,6 +7,7 @@ if (environment.production) {
   Object.assign(AppConfig, WindowRef.trailcam_dashboard_config);
 } else {
   AppConfig['assets_path'] = 'assets/';
+  AppConfig['ngw_root_url'] = '';
   AppConfig['locale'] = 'ru';
   AppConfig['trailcam_id'] = 96;
   AppConfig['trailcam_lat'] = 50.0;
