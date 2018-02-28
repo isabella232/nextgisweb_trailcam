@@ -1126,3 +1126,35 @@ $margin-base-vertical:         15px !default;
 $padding-default-vertical:     10px !default;
 $medium-pale-bg:             #F1EAE0 !default;
 $pale-bg:                    #F9F7F3 !default;
+
+
+
+
+// Variables for _bmd.scss styles
+
+$font-size-sm: $font-size-small;
+$font-size-lg: $font-size-large;
+
+$bmd-form-line-height: $mdb-input-line-height-base !default; // set as 1x font-size so that padding is easier calculated to match the spec.
+$bmd-label-top-margin-base: $mdb-label-top-margin-base !default;
+
+$bmd-form-line-height-lg: $mdb-input-line-height-large !default; // set as 1x font-size so that padding is easier calculated to match the spec.
+$bmd-label-top-margin-lg: $mdb-label-top-margin-large !default; // 16px
+
+$bmd-form-line-height-sm: $mdb-input-line-height-small !default; // set as 1x font-size so that padding is easier calculated to match the spec.
+$bmd-label-top-margin-sm: $mdb-label-top-margin-small !default; // 12px
+
+$input-padding-x: 0 !default; // .75rem !default;
+$input-padding-y: $padding-small-vertical !default; // spec 8px // .375rem !default;
+$input-padding-y-sm: $padding-small-vertical;
+$input-padding-y-lg: $padding-large-vertical;
+
+// inputs
+$bmd-bmd-label-static-size-ratio: 75 / 100 !default;
+$bmd-help-size-ratio: 75 / 100 !default;
+
+//$bmd-form-control-bg-repeat-y: repeat-y !default; // it could work with no-repeat, but on Safari it's bugged and repeat-y is needed, but repeat-y is bugged on the warning icon.
+$bmd-form-control-bg-repeat-y: no-repeat !default;
+$bmd-form-control-bg-position: center bottom, center calc(100% - 1px) !default;
+$bmd-form-control-bg-size: 0 100%, 100% 100% !default;
+$bmd-form-control-bg-size-active: 100% 100%, 100% 100% !default;

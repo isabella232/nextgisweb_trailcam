@@ -1,0 +1,219 @@
+@mixin animation-default($duration:0.2s) {
+  transition-duration: $duration;
+  transition-timing-function: $mdb-animation-curve-default;
+}
+
+@mixin bmd-form-size-variant($font-size, $label-top-margin, $variant-padding-y, $variant-line-height, $form-group-context: null) {
+  $variant-input-height: (
+    ($font-size * $variant-line-height) + ($variant-padding-y * 2)
+  );
+  $static-font-size: ($bmd-bmd-label-static-size-ratio * $font-size);
+  $help-font-size: ($bmd-help-size-ratio * $font-size);
+
+  $label-static-top: $label-top-margin;
+  $label-placeholder-top: $label-top-margin + $static-font-size +
+    $variant-padding-y;
+
+  //@debug "font-size: #{$font-size} static-font-size: #{$static-font-size} help-font-size: #{$help-font-size} form-group-context: #{$form-group-context} ";
+
+  //Label height: 72dp
+  //Padding above label text: 16dp
+  //Padding between label and input text: 8dp
+  //Padding below input text (including divider): 16dp
+  //Padding below text divider: 8dp
+
+  @if $form-group-context {
+    // Create a space at the top of the bmd-form-group for the label.
+    //  The label is absolutely positioned, so we use top padding to make space.  This padding extends over the label down to the top of the input (padding).
+    padding-top: ($label-top-margin + $static-font-size);
+    // note: bottom-margin of this is determined by $spacer.  @see _spacer.scss
+    //margin-bottom: (1.5 * $help-font-size);
+  }
+
+  // TODO: remove this when known stable.  https://github.com/FezVrasta/bootstrap-material-design/issues/849
+  //@else {
+  //
+  //  // for radios and checkboxes without a form-group, add some extra vertical spacing to pad down so that
+  //  //  any help text above is not encroached upon, or so that it appears more evenly spaced vs form-groups
+  //  .radio,
+  //  label.radio-inline,
+  //  .checkbox,
+  //  label.checkbox-inline,
+  //  .switch {
+  //    padding-top: $spacer-y;
+  //  }
+  //}
+
+  // Set all line-heights preferably to 1 so that we can space out everything manually without additional added space
+  //  from the default line-height of 1.5
+  .form-control,
+  label,
+  input::placeholder {
+    line-height: $variant-line-height;
+  }
+
+  .radio label,
+  label.radio-inline,
+  .checkbox label,
+  label.checkbox-inline,
+  .switch label {
+    line-height: $line-height-base; // keep the same line height for radios and checkboxes
+  }
+
+  // Note: this may be inside or outside a form-group, may be .bmd-form-group.bmd-form-group-sm or .bmd-form-group.bmd-form-group-lg
+  input::placeholder {
+    font-size: $font-size;
+  }
+
+  // generic labels used anywhere in the form
+  .checkbox label,
+  .radio label,
+  label {
+    font-size: $font-size;
+  }
+
+  // floating/placeholder default (no focus)
+  .bmd-label-floating,
+  .bmd-label-placeholder {
+    //@debug "top: #{$label-as-placeholder-top}";
+    top: $label-placeholder-top; // place the floating label to look like a placeholder with input padding
+  }
+
+  // floating focused/filled will look like static
+  &.is-focused,
+  .is-focused,
+  &.is-filled,
+  .is-filled {
+    .bmd-label-floating {
+      @include bmd-label-static($label-static-top, $static-font-size);
+    }
+  }
+
+  // static
+  .bmd-label-static {
+    @include bmd-label-static($label-static-top, $static-font-size);
+  }
+  // #559 Fix for webkit/chrome autofill - rule must be separate because it breaks firefox otherwise #731
+  //input:-webkit-autofill ~ .bmd-label-floating {  FIXME: confirm that the autofill js generation of change event makes this unnecessary
+  //  @include bmd-label-static($label-top, $static-font-size, $static-line-height);
+  //}
+
+  .bmd-help {
+    margin-top: 0; // allow the input margin to set-off the top of the help-block
+    font-size: $help-font-size;
+  }
+
+  // validation icon placement
+  .form-control {
+    &.form-control-success,
+    &.form-control-warning,
+    &.form-control-danger {
+      $icon-bg-size: ($variant-input-height * .5) ($variant-input-height * .5);
+      background-size: $bmd-form-control-bg-size, $icon-bg-size;
+
+      &,
+      &:focus,
+      .bmd-form-group.is-focused & {
+        padding-right: ($input-padding-x * 3);
+        background-repeat: $bmd-form-control-bg-repeat-y, no-repeat;
+        background-position: $bmd-form-control-bg-position,
+          center right ($variant-input-height * .25);
+      }
+
+      &:focus,
+      .bmd-form-group.is-focused & {
+        background-size: $bmd-form-control-bg-size-active, $icon-bg-size;
+      }
+    }
+  }
+}
+
+// must be broken out for reuse - webkit selector breaks firefox
+@mixin bmd-label-static($label-top, $static-font-size) {
+  top: $label-top;
+  left: 0;
+  // must repeat because the previous (more generic) selectors
+  font-size: $static-font-size;
+}
+
+// Reference http://www.google.com/design/spec/components/text-fields.html
+// MDL implementation: http://www.getmdl.io/components/index.html#textfields-section
+//.variations(unquote(" label"), color, $bmd-input-placeholder-color);  // default label color variations
+
+// Whereas .form-group adds structure, bmd-form-group just needs to make sure we have enough padding for our labels to work.  That's the only purpose.
+.bmd-form-group {
+  position: relative;
+
+  // -----
+  // Labels
+  //
+  // Reference http://www.google.com/design/spec/components/text-fields.html
+  // MDL implementation: http://www.getmdl.io/components/index.html#textfields-section
+  [class^='bmd-label'],
+  [class*=' bmd-label'] {
+    position: absolute;
+    pointer-events: none;
+    transition: 0.3s ease all;
+
+    // hint to browser for optimization
+    &.bmd-label-floating {
+      will-change: left, top, contents; // TODO: evaluate effectiveness - looking for community feedback
+    }
+  }
+
+  // hide label-placeholders when the field is filled
+  &.is-filled .bmd-label-placeholder {
+    display: none;
+  }
+
+  // Optional class to make the text field inline collapsible/expandable (collapsed by default)
+  //    This uses the BS collapse js to make the width expand.
+  //    `width` class must also be on the element FIXME: do this with JS, it is a marker class and should be implicit because after all, we are an bmd-collapse-inline
+  //    FIXME: js needs to do the focus on shown.bs.collapse event http://v4-alpha.getbootstrap.com/components/collapse/#events
+  &.bmd-collapse-inline {
+    display: flex;
+    align-items: center;
+    padding: 0; // get rid of any padding as this is a width transition
+    min-height: 2.1em;
+
+    // Expandable Holder.
+    .collapse {
+      flex: 1;
+      display: none;
+      &.show {
+        // This is an unfortunate hack. Animating between widths in percent (%)
+        // in many browsers (Chrome, Firefox) only animates the inner visual style
+        // of the input - the outer bounding box still 'jumps'.
+        // Thus assume a sensible maximum, and animate to/from that value.
+        max-width: 1200px;
+      }
+    }
+
+    .collapsing,
+    .width:not(.collapse),
+      // collapsing is removed and momentarily only width is present
+    .collapse.show {
+      display: block;
+    }
+
+    .collapsing {
+      @include animation-default(0.2s);
+    }
+  }
+
+  // default floating size/location with an bmd-form-group
+  @include bmd-form-size-variant($font-size-base, $bmd-label-top-margin-base, $input-padding-y, $bmd-form-line-height, "bmd-form-group default");
+
+  // sm floating size/location
+  &.bmd-form-group-sm {
+    @include bmd-form-size-variant($font-size-sm, $bmd-label-top-margin-sm, $input-padding-y-sm, $bmd-form-line-height-sm, "bmd-form-group sm");
+  }
+
+  // lg floating size/location
+  &.bmd-form-group-lg {
+    @include bmd-form-size-variant($font-size-lg, $bmd-label-top-margin-lg, $input-padding-y-lg, $bmd-form-line-height-sm, "bmd-form-group lg");
+  }
+}
+
+// default floating size/location without a form-group (will skip form-group styles, and just render default sizing variation) - IMPORTANT for non-form-group spacing such as radio/checkbox/switch
+@include bmd-form-size-variant($font-size-base, $bmd-label-top-margin-base, $input-padding-y, $bmd-form-line-height);
